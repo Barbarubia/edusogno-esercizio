@@ -17,14 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Controllo se il campo email è vuoto
     if (empty(trim($_POST["email"]))) {
-        $email_error = "Inserisci la tua email";
+        $email_error = "- Campo obbligatorio!";
     } else {
         $email = trim($_POST["email"]);
     }
     
     // Controllo se il campo password è vuoto
     if (empty(trim($_POST["password"]))) {
-        $password_error = "Inserisci la tua password";
+        $password_error = "- Campo obbligatorio!";
     } else {
         $password = trim($_POST["password"]);
     }
@@ -89,6 +89,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edusogno - Login</title>
+    <!-- Link Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="./assets/styles/style.css">
 </head>
 
 <body>
@@ -99,46 +105,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
     <main>
 
-        <h2>Hai già un account?</h2>
+        <h2 class="page-title">Hai già un account?</h2>
 
         <!-- Form per effettuare il login -->
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <div class="container">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-            <!-- Campo inserimento email -->
-            <div>
-                <label>Inserisci l'email</label>
-                <input type="email" name="email" value="<?php echo $email; ?>" placeholder="name@example.com">
-                <!-- Warning se l'utente fa il submit lasciando il campo email vuoto -->
-                <span><?php echo $email_error; ?></span>
-            </div>
+                <!-- Campo inserimento email -->
+                <div class="form-field">
+                    <label class="<?php echo (!empty($email_error)) ? 'error-msg' : ''; ?>">Inserisci l'email
+                    <!-- Warning se l'utente fa il submit lasciando il campo email vuoto -->
+                    <?php echo $email_error; ?>
+                    </label>
+                    <input type="email" name="email" class="<?php echo (!empty($email_error)) ? 'error-input' : ''; ?>" value="<?php echo $email; ?>" placeholder="name@example.com">
+                </div>
 
-            <!-- Campo inserimento password -->
-            <div>
-                <label>Inserisci la password</label>
-                <input type="password" name="password" placeholder="Scrivila qui">
-                <!-- Warning se l'utente fa il submit lasciando il campo password vuoto -->
-                <span><?php echo $email_error; ?></span>
-            </div>
+                <!-- Campo inserimento password -->
+                <div class="form-field">
+                    <label class="<?php echo (!empty($password_error)) ? 'error-msg' : ''; ?>">Inserisci la password
+                    <!-- Warning se l'utente fa il submit lasciando il campo password vuoto -->
+                    <?php echo $password_error; ?>
+                    </label>
+                    <input type="password" name="password" class="<?php echo (!empty($password_error)) ? 'error-input' : ''; ?>" placeholder="Scrivila qui">
+                </div>
 
-            <!-- Bottone submit form -->
-            <div>
-                <input type="submit" value="ACCEDI">
-            </div>
+                <!-- Bottone submit form -->
+                <div class="form-submit">
+                    <input class="button" type="submit" value="ACCEDI">
+                </div>
 
-            <!-- Messaggio credenziali errate -->
-            <div>
+                <!-- Messaggio credenziali errate -->
                 <?php 
                 if(!empty($login_error)){
-                    echo $login_error;
+                    echo '<div class="error">' . $login_error . '</div>';
                 }        
                 ?>
-            </div>
-            
-        </form>
+                
+            </form>
 
-        <!-- Link per registrarsi -->
-        <div>
-            <p>Non hai ancora un profilo? <a href="register.php">Registrati</a></p>
+            <!-- Link per registrarsi -->
+            <p class="link-msg">Non hai ancora un profilo? <a href="register.php">Registrati</a></p>
+
         </div>
 
     </main>

@@ -1,0 +1,116 @@
+/* Reset CSS e assegnazione font Google */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* Background */
+body {
+    background: #D9E5F3 url("../img/background.png") no-repeat fixed bottom;
+    background-size: cover;
+}
+
+/* STILE HEADER */
+header {
+    background-color: white;
+    box-shadow: 0px 4px 18px -6px #0057FF;
+    border-radius: 0 0 1rem 1rem;
+    padding: 2rem 3rem;
+}
+
+/* STILE MAIN */
+
+/* Titolo pagina */
+.page-title {
+    text-align: center;
+    margin: 5rem auto 1rem auto;
+    font-size: 2rem;
+    color: #134077;
+}
+
+/* Contenuto principale */
+.container {
+    background-color: white;
+    border: 1px solid #134077;
+    max-width: 700px;
+    margin: auto;
+    padding: 3rem;
+    border-radius: 1.5rem;
+}
+
+/* Stile form */
+.form-field,
+.form-submit {
+    display: flex;
+    flex-direction: column;
+    justify-items: stretch;
+    margin-bottom: 2rem;
+}
+
+.form-field label {
+    margin-bottom: .7rem;
+    color: #231F20;
+    font-weight: 800;
+}
+
+.form-field label.error-msg {
+    color: red;
+}
+
+.form-field input {
+    border: none;
+    border-bottom: 1px solid #2D224C;
+    font-size: 1.5rem;
+}
+
+.form-field input.error-input {
+    border-bottom: 1px solid red;
+}
+
+.form-field input:focus-visible {
+    outline: none;
+}
+
+::placeholder {
+    color: #CCCCCC;
+}
+
+.form-submit .button {
+    background-color: #0057FF;
+    border: none;
+    border-radius: .8rem;
+    color: white;
+    text-align: center;
+    padding: .6rem;
+    font-size: 1.2rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.form-submit .button:hover {
+    background-color: #D9E5F3;
+    color: #134077;
+    box-shadow: 0px 0px 7px 1px #134077;
+}
+
+.error {
+    margin-bottom: 2rem;
+    background-color: rgb(255, 196, 196);
+    border-radius: .8rem;
+    color: red;
+    padding: .6rem 1rem;
+    font-weight: 500;
+}
+
+.link-msg {
+    text-align: center;
+    color: #2D224C;
+}
+
+.link-msg a {
+    color: #2D224C;
+    font-weight: 800;
+    text-decoration: underline;
+}
