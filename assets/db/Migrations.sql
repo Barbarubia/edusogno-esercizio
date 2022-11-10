@@ -15,4 +15,13 @@ data_evento datetime,
 PRIMARY KEY (id)
 );
 
-INSERT INTO `evento`(`attendees`, `nome_evento`, `data_evento`) VALUES ('ulysses200915@varen8.com,qmonkey14@falixiao.com,mavbafpcmq@hitbase.net','Test Edusogno 1', '2022-10-13 14:00'), ('dgipolga@edume.me,qmonkey14@falixiao.com,mavbafpcmq@hitbase.net','Test Edusogno 2', '2022-10-15 19:00'), ('dgipolga@edume.me,ulysses200915@varen8.com,mavbafpcmq@hitbase.net','Test Edusogno 2', '2022-10-15 19:00')
+INSERT INTO `utenti`(`nome`,`cognome`,`email`,`password`) VALUES
+('Marco', 'Rossi', 'ulysses200915@varen8.com', 'Edusogno123'),
+('Filippo', 'D’Amelio', 'qmonkey14@falixiao.com', 'Edusogno?123'),
+('Gian Luca', 'Carta', 'mavbafpcmq@hitbase.net', 'EdusognoCiao'),
+('Stella', 'De Grandis', 'dgipolga@edume.me', 'EdusognoGia');
+
+INSERT INTO `eventi`(`attendees`, `nome_evento`, `data_evento`) VALUES
+('ulysses200915@varen8.com,qmonkey14@falixiao.com,mavbafpcmq@hitbase.net','Test Edusogno 1', '2022-10-13 14:00'),
+('dgipolga@edume.me,qmonkey14@falixiao.com,mavbafpcmq@hitbase.net','Test Edusogno 2', '2022-10-14 19:00'),
+('dgipolga@edume.me,ulysses200915@varen8.com,mavbafpcmq@hitbase.net','Test Edusogno 3', '2022-10-15 19:00')
