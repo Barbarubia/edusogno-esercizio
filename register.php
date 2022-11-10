@@ -17,21 +17,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
     // Validazione del nome
     if (empty(trim($_POST["nome"]))) {
-        $nome_error = "Campo obbligatorio - Inserisci il tuo nome";
+        $nome_error = "- Campo obbligatorio!";
     } else {
         $nome = trim($_POST["nome"]);
     }
 
     // Validazione del cognome
     if (empty(trim($_POST["cognome"]))) {
-        $cognome_error = "Campo obbligatorio - Inserisci il tuo cognome";
+        $cognome_error = "- Campo obbligatorio!";
     } else {
         $cognome = trim($_POST["cognome"]);
     }
 
     // Validazione dell'email
     if (empty(trim($_POST["email"]))) {
-        $email_error = "Campo obbligatorio - Inserisci la tua email";
+        $email_error = "- Campo obbligatorio!";
     } else {
         $sql = "SELECT id FROM utenti WHERE email = ?";
         
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 // Verifico se l'email è già stata usata
                 if ($stmt->num_rows == 1) {
-                    $email_error = "L'email digitata è già stata utilizzata";
+                    $email_error = "- Email già utilizzata!";
                 } else {
                     $email = trim($_POST["email"]);
                 }
@@ -59,9 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Validazione della password
     if (empty(trim($_POST["password"]))) {
-        $password_error = "Inserisci una password di almeno 8 e massimo 25 caratteri";     
+        $password_error = "- Campo obbligatorio! (min 8 max 25 caratteri)";     
     } elseif (strlen(trim($_POST["password"])) < 8 || strlen(trim($_POST["password"])) > 25) {
-        $password_error = "La password deve contenere almeno 8 e massimo 25 caratteri";
+        $password_error = "- La password deve contenere tra 8 e 25 caratteri";
     } else {
         $password = trim($_POST["password"]);
     }
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             if ($stmt->execute()) {
                 // Messaggio di successo
-                $success = "Registrazione effettuata con successo! Stai per essere reindirizzato alla pagina di login.";
+                $success = "Registrazione effettuata con successo!<br>Stai per essere reindirizzato alla pagina di login.";
 
                 // Redirect alla pagina di login
                 header("refresh: 3; url=index.php");
@@ -105,6 +105,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edusogno - Registrati</title>
+    <!-- Link Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="./assets/styles/style.css">
 </head>
 
 <body>
@@ -115,64 +121,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <main>
 
-        <h2>Crea il tuo account</h2>
+        <h2 class="page-title">Crea il tuo account</h2>
 
-        <!-- Mostro un messaggio a registrazione effettuata con successo -->
-        <?php if (!empty($success)) : ?>
-            <span>
-                <?php echo $success; ?>
-            </span>
+        <div class="container">
+            <!-- Mostro un messaggio a registrazione effettuata con successo -->
+            <?php if (!empty($success)) : ?>
+                <div class="success">
+                    <?php echo $success; ?>
+                </div>
 
-        <!-- Altrimenti mostro il form per effettuare la registrazione -->
-        <?php else : ?>
+            <!-- Altrimenti mostro il form per effettuare la registrazione -->
+            <?php else : ?>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-            <!-- Campo inserimento nome -->
-            <div>
-                <label>Inserisci il nome</label>
-                <input type="text" name="nome" value="<?php echo $nome; ?>" placeholder="Mario">
-                <!-- Warning se l'utente fa il submit lasciando il campo nome vuoto -->
-                <span><?php echo $nome_error; ?></span>
-            </div>
+                <!-- Campo inserimento nome -->
+                <div class="form-field">
+                    <label class="<?php echo (!empty($nome_error)) ? 'error-msg' : ''; ?>">Inserisci il nome
+                    <!-- Warning se l'utente fa il submit lasciando il campo nome vuoto -->
+                    <?php echo $nome_error; ?>
+                    </label>
+                    <input type="text" name="nome" value="<?php echo $nome; ?>" class="<?php echo (!empty($nome_error)) ? 'error-input' : ''; ?>" placeholder="Mario">
+                </div>
 
-            <!-- Campo inserimento cognome -->
-            <div>
-                <label>Inserisci il cognome</label>
-                <input type="text" name="cognome" value="<?php echo $cognome; ?>" placeholder="Rossi">
-                <!-- Warning se l'utente fa il submit lasciando il campo cognome vuoto -->
-                <span><?php echo $cognome_error; ?></span>
-            </div>
+                <!-- Campo inserimento cognome -->
+                <div class="form-field">
+                    <label class="<?php echo (!empty($cognome_error)) ? 'error-msg' : ''; ?>">Inserisci il cognome
+                    <!-- Warning se l'utente fa il submit lasciando il campo cognome vuoto -->
+                    <?php echo $cognome_error; ?>
+                    </label>
+                    <input type="text" name="cognome" value="<?php echo $cognome; ?>" class="<?php echo (!empty($cognome_error)) ? 'error-input' : ''; ?>" placeholder="Rossi">
+                </div>
 
-            <!-- Campo inserimento email -->
-            <div>
-                <label>Inserisci l'email</label>
-                <input type="email" name="email" value="<?php echo $email; ?>" placeholder="name@example.com">
-                <!-- Warning se l'utente fa il submit lasciando il campo email vuoto o utilizzando un'email già registrata -->
-                <span><?php echo $email_error; ?></span>
-            </div>
+                <!-- Campo inserimento email -->
+                <div class="form-field">
+                    <label class="<?php echo (!empty($email_error)) ? 'error-msg' : ''; ?>">Inserisci l'email
+                    <!-- Warning se l'utente fa il submit lasciando il campo email vuoto o utilizzando un'email già registrata -->
+                    <?php echo $email_error; ?>
+                    </label>
+                    <input type="email" name="email" value="<?php echo $email; ?>" class="<?php echo (!empty($email_error)) ? 'error-input' : ''; ?>" placeholder="name@example.com">
+                </div>
 
-            <!-- Campo inserimento password -->
-            <div>
-                <label>Inserisci la password</label>
-                <input type="password" name="password" value="<?php echo $password; ?>" placeholder="Scrivila qui">
-                <!-- Warning se l'utente fa il submit lasciando il campo password vuoto o usando una password troppo corta o troppo lunga -->
-                <span><?php echo $password_error; ?></span>
-            </div>
+                <!-- Campo inserimento password -->
+                <div class="form-field">
+                    <label class="<?php echo (!empty($password_error)) ? 'error-msg' : ''; ?>">Inserisci la password
+                    <!-- Warning se l'utente fa il submit lasciando il campo password vuoto o usando una password troppo corta o troppo lunga -->
+                    <?php echo $password_error; ?>
+                    </label>
+                    <input type="password" name="password" value="<?php echo $password; ?>" class="<?php echo (!empty($password_error)) ? 'error-input' : ''; ?>" placeholder="Scrivila qui">
+                </div>
 
-            <!-- Bottone submit form -->
-            <div>
-                <input type="submit" value="REGISTRATI">
-            </div>
-            
-        </form>
+                <!-- Bottone submit form -->
+                <div class="form-submit">
+                    <input class="button" type="submit" value="REGISTRATI">
+                </div>
+                
+            </form>
 
-        <!-- Link per andare alla pagina di login -->
-        <div>
-            <p>Hai già un account? <a href="index.php">Accedi</a></p>
+            <!-- Link per andare alla pagina di login -->
+            <p class="link-msg">Hai già un account? <a href="index.php">Accedi</a></p>
+
+            <?php endif; ?>
         </div>
-
-        <?php endif; ?>
 
     </main>
     
