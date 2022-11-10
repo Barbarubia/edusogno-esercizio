@@ -31,7 +31,7 @@ header {
 .page-title {
     text-align: center;
     margin: 5rem auto 1rem auto;
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #134077;
 }
 
@@ -82,19 +82,21 @@ header {
     color: #CCCCCC;
 }
 
-.form-submit .button {
+.form-submit .button,
+.event-card .button {
     background-color: #0057FF;
     border: none;
     border-radius: .8rem;
     color: white;
     text-align: center;
-    padding: .6rem;
+    padding: 1rem;
     font-size: 1.2rem;
-    font-weight: 800;
+    font-weight: 500;
     cursor: pointer;
 }
 
-.form-submit .button:hover {
+.form-submit .button:hover,
+.event-card .button:hover {
     background-color: #D9E5F3;
     color: #134077;
     box-shadow: 0px 0px 7px 1px #134077;
@@ -130,4 +132,34 @@ header {
     padding: .6rem 1rem;
     font-size: 1.5rem;
     font-weight: 500;
+}
+
+/* PAGINA UTENTE - CARDS EVENTI */
+.events-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 5rem auto;
+}
+
+.event-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: white;
+    border: 1px solid #134077;
+    padding: 2rem;
+    border-radius: 1.5rem;
+}
+
+.event-card .event-name {
+    font-size: 3rem;
+    color: #231F20;
+}
+
+.event-card .event-date {
+    font-size: 1.5rem;
+    color: #CCCCCC;
 }

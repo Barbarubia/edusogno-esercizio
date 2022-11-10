@@ -25,6 +25,12 @@ $eventi = $risposta->fetch_all(MYSQLI_ASSOC);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edusogno - Pagina di <?php echo htmlspecialchars($_SESSION["nome"]) . " " . htmlspecialchars($_SESSION["cognome"]); ?></title>
+    <!-- Link Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="./assets/styles/style.css">
 </head>
 
 <body>
@@ -34,7 +40,8 @@ $eventi = $risposta->fetch_all(MYSQLI_ASSOC);
     </header>
 
     <main>
-        <h2 class="my-5">Ciao <?php echo strtoupper(htmlspecialchars($_SESSION["nome"])); ?>, 
+        <!-- Messaggio di benvenuto con controllo se l'utente ha degli eventi programmati -->
+        <h2 class="page-title">Ciao <?php echo strtoupper(htmlspecialchars($_SESSION["nome"])); ?>, 
         <?php if (count($eventi) > 0) : ?>
         ecco i tuoi eventi:
         <?php else : ?>
@@ -42,17 +49,17 @@ $eventi = $risposta->fetch_all(MYSQLI_ASSOC);
         <?php endif; ?>
         </h2>
 
-        <div class="container">
-            <?php if (count($eventi) > 0) : ?>
+        <?php if (count($eventi) > 0) : ?>
+            <div class="events-container">
                 <?php foreach ($eventi as $evento) : ?>
-                    <div>
-                        <h3><?= $evento["nome_evento"] ?></h3>
-                        <p><?= date("d-m-Y H:i", strtotime($evento["data_evento"])); ?></p>
-                        <button name="login">JOIN</button>
+                    <div class="event-card">
+                        <h3 class="event-name"><?= $evento["nome_evento"] ?></h3>
+                        <p class="event-date"><?= date("d-m-Y H:i", strtotime($evento["data_evento"])); ?></p>
+                        <button class="button" name="join">JOIN</button>
                     </div>
                 <?php endforeach; ?>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endif; ?>
     </main>
     
 </body>
